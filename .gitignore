@@ -1,0 +1,14 @@
+node_modules/
+output/
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example

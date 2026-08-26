@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/curriculo-core/resume.schema.json",
+  "title": "Currículo",
+  "type": "object",
+  "required": ["basics", "summary"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "locale": { "enum": ["pt-BR", "en"] },
+    "targetKeywords": { "$ref": "#/$defs/stringList" },
+    "basics": {
+      "type": "object",
+      "required": ["name", "headline"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "headline": { "$ref": "#/$defs/text" },
+        "email": { "$ref": "#/$defs/text" },
+        "phone": { "$ref": "#/$defs/text" },
+        "location": { "$ref": "#/$defs/text" },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label", "url"],
+            "properties": {
+              "label": { "$ref": "#/$defs/text" },
+              "url": { "type": "string", "format": "uri", "pattern": "^https?://" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "showEmail": { "type": "boolean" },
+        "showPhone": { "type": "boolean" },
+        "showLocation": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "summary": { "$ref": "#/$defs/text" },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "items"],
+        "properties": {
+          "category": { "$ref": "#/$defs/text" },
+          "items": { "$ref": "#/$defs/nonEmptyStringList" },
+          "tags": { "$ref": "#/$defs/stringList" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "experience": { "type": "array", "items": { "$ref": "#/$defs/experience" } },
+    "projects": { "type": "array", "items": { "$ref": "#/$defs/project" } },
+    "education": { "type": "array", "items": { "$ref": "#/$defs/education" } },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "level"],
+        "properties": {
+          "name": { "$ref": "#/$defs/text" },
+          "level": { "$ref": "#/$defs/text" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "primaryColor": { "type": "string", "pattern": "^[0-9A-Fa-f]{6}$" },
+        "maxExperiences": { "type": "integer", "minimum": 0 },
+        "maxProjects": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 },
+    "stringList": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+    "nonEmptyStringList": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+    "commonEntry": {
+      "type": "object",
+      "properties": {
+        "start": { "$ref": "#/$defs/text" },
+        "end": { "$ref": "#/$defs/text" },
+        "current": { "type": "boolean" },
+        "description": { "$ref": "#/$defs/text" },
+        "highlights": { "$ref": "#/$defs/stringList" },
+        "tags": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "experience": {
+      "allOf": [
+        { "$ref": "#/$defs/commonEntry" },
+        {
+          "type": "object",
+          "required": ["role", "organization"],
+          "properties": {
+            "role": { "$ref": "#/$defs/text" },
+            "organization": { "$ref": "#/$defs/text" }
+          }
+        }
+      ]
+    },
+    "project": {
+      "allOf": [
+        { "$ref": "#/$defs/commonEntry" },
+        {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": { "$ref": "#/$defs/text" },
+            "organization": { "$ref": "#/$defs/text" }
+          }
+        }
+      ]
+    },
+    "education": {
+      "allOf": [
+        { "$ref": "#/$defs/commonEntry" },
+        {
+          "type": "object",
+          "required": ["course", "institution"],
+          "properties": {
+            "course": { "$ref": "#/$defs/text" },
+            "institution": { "$ref": "#/$defs/text" }
+          }
+        }
+      ]
+    }
+  }
+}

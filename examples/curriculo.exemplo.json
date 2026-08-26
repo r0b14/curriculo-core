@@ -1,0 +1,88 @@
+{
+  "$schema": "../schema/resume.schema.json",
+  "locale": "pt-BR",
+  "targetKeywords": ["frontend", "acessibilidade", "JavaScript"],
+  "basics": {
+    "name": "Pessoa Exemplo",
+    "headline": "Desenvolvimento de Software | Produtos Digitais",
+    "email": "candidato@example.com",
+    "location": "Cidade - UF",
+    "links": [
+      {
+        "label": "Portfólio",
+        "url": "https://example.com/portfolio"
+      }
+    ]
+  },
+  "privacy": {
+    "showEmail": true,
+    "showPhone": false,
+    "showLocation": true
+  },
+  "summary": "Profissional de tecnologia com experiência na construção de interfaces acessíveis, integração de APIs e colaboração com equipes de produto.",
+  "skills": [
+    {
+      "category": "Desenvolvimento",
+      "items": ["JavaScript", "TypeScript", "HTML", "CSS"],
+      "tags": ["frontend"]
+    },
+    {
+      "category": "Qualidade",
+      "items": ["Testes automatizados", "Acessibilidade", "Code review"],
+      "tags": ["acessibilidade"]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Pessoa Desenvolvedora Front-end",
+      "organization": "Empresa Exemplo",
+      "start": "2024",
+      "current": true,
+      "highlights": [
+        "Desenvolveu componentes reutilizáveis com JavaScript e TypeScript.",
+        "Colaborou com design e produto para melhorar acessibilidade e experiência de uso."
+      ],
+      "tags": ["frontend", "JavaScript", "acessibilidade"]
+    },
+    {
+      "role": "Estágio em Tecnologia",
+      "organization": "Organização Demonstração",
+      "start": "2023",
+      "end": "2024",
+      "highlights": [
+        "Documentou rotinas técnicas e apoiou o atendimento a pessoas usuárias."
+      ],
+      "tags": ["suporte"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Catálogo Acessível",
+      "organization": "Projeto demonstrativo",
+      "description": "Aplicação web fictícia criada para demonstrar a estrutura do gerador.",
+      "highlights": [
+        "Implementou navegação por teclado e testes de contraste."
+      ],
+      "tags": ["frontend", "acessibilidade"]
+    }
+  ],
+  "education": [
+    {
+      "course": "Tecnologia em Desenvolvimento de Sistemas",
+      "institution": "Instituição Exemplo",
+      "start": "2022",
+      "end": "2024"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Português",
+      "level": "Nativo"
+    }
+  ],
+  "options": {
+    "primaryColor": "1F3A5F",
+    "maxExperiences": 3,
+    "maxProjects": 2
+  }
+}

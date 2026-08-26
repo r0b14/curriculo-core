@@ -1,0 +1,27 @@
+{
+  "name": "curriculo-core",
+  "version": "0.1.0",
+  "description": "Núcleo open source para gerar currículos ATS em LaTeX a partir de dados JSON.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "curriculo-core": "./src/cli.js"
+  },
+  "scripts": {
+    "check": "node --check src/cli.js && node --check src/core/generate-resume.js",
+    "test": "node --test",
+    "validate:example": "node src/cli.js validate --input examples/curriculo.exemplo.json",
+    "generate:example": "node src/cli.js generate --input examples/curriculo.exemplo.json --output output/curriculo-exemplo.tex"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "curriculo",
+    "resume",
+    "cv",
+    "latex",
+    "ats"
+  ],
+  "license": "MIT"
+}

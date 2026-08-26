@@ -1,0 +1,46 @@
+name: LaTeX smoke test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/core/**"
+      - "examples/curriculo.exemplo.json"
+      - "docker/latex/Dockerfile"
+      - ".github/workflows/latex-smoke.yml"
+  pull_request:
+    paths:
+      - "src/core/**"
+      - "examples/curriculo.exemplo.json"
+      - "docker/latex/Dockerfile"
+      - ".github/workflows/latex-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  compile-example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:example
+      - run: npm run generate:example
+      - name: Build isolated LaTeX image
+        run: docker build -t curriculo-core-latex -f docker/latex/Dockerfile .
+      - name: Compile fictitious example
+        run: >-
+          docker run --rm
+          --mount type=bind,source="${{ github.workspace }}/output",target=/work
+          curriculo-core-latex curriculo-exemplo.tex
+      - name: Upload example PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: curriculo-core-example-pdf
+          path: output/curriculo-exemplo.pdf
+          if-no-files-found: error
+          retention-days: 7

@@ -1,0 +1,4 @@
+**
+!docker/
+!docker/latex/
+!docker/latex/Dockerfile

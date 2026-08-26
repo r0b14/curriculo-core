@@ -1,93 +1,120 @@
-# Curriculo Core
+<div align="center">
 
-Gerador local e open source de currículos legíveis por pessoas e sistemas ATS. O projeto transforma dados JSON em um documento LaTeX A4, com validação, controle explícito de privacidade e priorização simples por palavras-chave da vaga.
+# Currículo Core
 
-O repositório contém somente o núcleo do produto: não inclui currículos reais, fotos, dados pessoais, integrações proprietárias ou uma interface específica.
+**Sua trajetória, pronta para avançar.**
 
-## Recursos
+Gerador local e open source de currículos profissionais, legíveis por pessoas e preparados para sistemas ATS.
 
-- CLI sem dependências externas de runtime;
-- contrato de dados documentado por JSON Schema;
-- template LaTeX A4, de uma coluna e com texto selecionável;
-- escape de caracteres reservados do LaTeX;
-- ocultação de telefone por padrão;
-- ordenação estável de experiências e projetos por aderência à vaga;
-- português do Brasil e inglês;
-- testes automatizados em Node.js 20 e 22.
+[![CI](https://github.com/r0b14/curriculo-core/actions/workflows/ci.yml/badge.svg)](https://github.com/r0b14/curriculo-core/actions/workflows/ci.yml)
+[![LaTeX smoke test](https://github.com/r0b14/curriculo-core/actions/workflows/latex-smoke.yml/badge.svg)](https://github.com/r0b14/curriculo-core/actions/workflows/latex-smoke.yml)
+![Node.js 20+](https://img.shields.io/badge/Node.js-20%2B-3C873A?logo=node.js&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-5B4BFF.svg)](LICENSE)
 
-## Requisitos
+[Começar](#comece-em-1-minuto) · [Sugestão de front](#sugestão-de-frontend) · [Documentação](docs/README.md) · [Usar sem LaTeX](docs/latex/without-local-install.md) · [Contribuir](CONTRIBUTING.md)
 
-- Node.js 20 ou superior;
-- opcionalmente, uma distribuição LaTeX com `pdflatex` para gerar o PDF.
+</div>
 
-## Começando
+---
+
+## Por que o Currículo Core?
+
+- **Local por padrão:** os dados permanecem na sua máquina.
+- **Compatível com ATS:** documento A4, textual, selecionável e sem layout frágil.
+- **Adaptável por vaga:** prioriza experiências e projetos usando palavras-chave reais.
+- **Honesto:** reorganiza evidências fornecidas, sem inventar competências ou resultados.
+- **Portável:** gera `.tex` sem exigir LaTeX e PDF quando `pdflatex` está disponível.
+- **Simples de integrar:** núcleo em Node.js, sem dependências externas de runtime.
+
+## Comece em 1 minuto
+
+Requisito: **Node.js 20 ou superior**.
 
 ```bash
+git clone https://github.com/r0b14/curriculo-core.git
+cd curriculo-core
 npm install
 npm run validate:example
 npm run generate:example
 ```
 
-O último comando cria `output/curriculo-exemplo.tex`. Para também gerar o PDF:
+O currículo de exemplo será gerado em `output/curriculo-exemplo.tex`. Nenhuma instalação LaTeX é necessária para essa etapa.
+
+### Gerar também o PDF
+
+Com `pdflatex` disponível na máquina:
 
 ```bash
-node src/cli.js generate \
-  --input examples/curriculo.exemplo.json \
-  --output output/curriculo-exemplo.tex \
-  --compile
+node src/cli.js generate --input examples/curriculo.exemplo.json --output output/curriculo-exemplo.tex --compile
 ```
 
-No PowerShell, execute o mesmo comando em uma única linha ou use a crase como continuação.
+Sem LaTeX local, use o [compilador isolado com Docker](docs/latex/without-local-install.md#modo-2--compilar-com-docker).
 
-## Contrato de dados
+## Como funciona
 
-O arquivo [schema/resume.schema.json](schema/resume.schema.json) descreve o formato completo. Um currículo mínimo é:
+```text
+JSON do currículo
+  → validação
+  → privacidade e normalização
+  → priorização por palavras-chave
+  → documento LaTeX seguro
+  → PDF opcional
+```
+
+O telefone começa oculto por padrão. Conteúdo fornecido pelo usuário é escapado antes de entrar no documento LaTeX.
+
+## Sugestão de frontend
+
+A pasta [`frontend/`](frontend/) contém uma proposta de interface moderna para demonstrar como o Currículo Core pode ser apresentado como produto web.
+
+Essa implementação usa **React, Vite e Tailwind CSS** e deve ser tratada como uma referência visual e funcional. O núcleo continua independente: validação, privacidade, priorização e geração LaTeX permanecem em `src/core/` e podem ser integradas a outros frontends, APIs ou aplicações.
+
+Para executar a sugestão de front:
+
+```bash
+cd frontend
+pnpm install
+pnpm dev
+```
+
+As decisões de marca, componentes e experiência estão documentadas em [`frontend/src/imports/style.md`](frontend/src/imports/style.md).
+
+## Exemplo mínimo
 
 ```json
 {
   "basics": {
     "name": "Pessoa Exemplo",
-    "headline": "Área de atuação"
+    "headline": "Desenvolvimento de Software"
   },
-  "summary": "Resumo profissional objetivo."
+  "summary": "Profissional com experiência na construção de produtos digitais."
 }
 ```
 
-As coleções opcionais são `skills`, `experience`, `projects`, `education` e `languages`. Veja [examples/curriculo.exemplo.json](examples/curriculo.exemplo.json) para um caso completo com identidade fictícia.
+O contrato completo está em [`schema/resume.schema.json`](schema/resume.schema.json) e um caso preenchido em [`examples/curriculo.exemplo.json`](examples/curriculo.exemplo.json).
 
-## Adaptação para uma vaga
+## Escolha seu modo de uso
 
-Informe termos reais da oportunidade em `targetKeywords`. Experiências e projetos com esses termos em `tags`, títulos, descrições ou resultados sobem na ordem, preservando a ordem original em caso de empate. Os limites `maxExperiences` e `maxProjects` controlam o tamanho final.
+| Objetivo | Precisa de LaTeX local? | Guia |
+|---|:---:|---|
+| Validar o JSON | Não | [Visão geral](docs/project.md) |
+| Gerar o arquivo `.tex` | Não | [LaTeX no projeto](docs/latex/README.md) |
+| Gerar PDF localmente | Sim | [Windows](docs/latex/windows.md) · [Linux](docs/latex/linux.md) · [macOS](docs/latex/macos.md) |
+| Gerar PDF com Docker | Não | [Sem instalação local](docs/latex/without-local-install.md) |
+| Trabalhar com agentes de IA | Não | [Codex, Claude e Gemini](docs/agents.md) |
 
-Esse mecanismo apenas reorganiza evidências fornecidas. Ele não inventa competências, métricas ou experiências.
+## Documentação
 
-## Privacidade
-
-```json
-{
-  "privacy": {
-    "showEmail": true,
-    "showPhone": false,
-    "showLocation": true
-  }
-}
-```
-
-O telefone fica oculto por padrão. O processamento é local e nenhum dado é enviado pela aplicação. Consulte [SECURITY.md](SECURITY.md) antes de trabalhar com currículos reais.
-
-## Arquitetura
-
-```text
-JSON do currículo
-  -> validação
-  -> normalização e regras de privacidade
-  -> priorização por palavras-chave
-  -> renderização segura em LaTeX
-  -> .tex
-  -> PDF opcional via pdflatex
-```
-
-O código de domínio está em `src/core/`; `src/cli.js` cuida somente de arquivos, argumentos e compilação opcional. Essa separação permite reutilizar `generateResume()` futuramente em uma API, interface web ou fila de documentos.
+| Assunto | Referência |
+|---|---|
+| Instalação, arquitetura e CLI | [`docs/project.md`](docs/project.md) |
+| Fundamentos e dependências LaTeX | [`docs/latex/README.md`](docs/latex/README.md) |
+| Diagnóstico de erros | [`docs/latex/troubleshooting.md`](docs/latex/troubleshooting.md) |
+| Sugestão de frontend | [`frontend/`](frontend/) |
+| Segurança e dados pessoais | [`SECURITY.md`](SECURITY.md) |
+| Instruções para agentes | [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md), [`GEMINI.md`](GEMINI.md) |
+| Brand e design system | [`frontend/src/imports/style.md`](frontend/src/imports/style.md) |
+| Índice completo | [`docs/README.md`](docs/README.md) |
 
 ## Desenvolvimento
 
@@ -96,6 +123,13 @@ npm run check
 npm test
 ```
 
-## Licença
+Mudanças no contrato de dados devem manter alinhados o JSON Schema, a validação em runtime, o exemplo, os testes e a documentação.
 
-[MIT](LICENSE)
+> [!IMPORTANT]
+> Currículos contêm dados pessoais. Não versione arquivos reais, PDFs gerados ou informações sensíveis. Consulte [`SECURITY.md`](SECURITY.md).
+
+## Contribuição e licença
+
+Contribuições são bem-vindas. Leia [`CONTRIBUTING.md`](CONTRIBUTING.md) antes de abrir um pull request.
+
+Distribuído sob a licença [MIT](LICENSE).

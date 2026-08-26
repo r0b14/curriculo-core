@@ -1,0 +1,10 @@
+{
+  "description": "Delivers a clean, intuitive interface with a top navigation bar and info cards, enhancing user engagement through a modern, responsive design.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

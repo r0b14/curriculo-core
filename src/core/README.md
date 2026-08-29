@@ -12,6 +12,8 @@ O núcleo transforma um objeto JavaScript válido em um documento LaTeX completo
 | 4 | [`render-latex.js`](render-latex.js) | Monta o documento A4 em uma coluna e traduz os rótulos |
 | 5 | [`latex.js`](latex.js) | Escapa texto e URLs antes de inseri-los no LaTeX |
 
+[`build-assistant-prompt.js`](build-assistant-prompt.js) é um fluxo auxiliar: combina o guia, o JSON já validado e a descrição da vaga em um pacote local. Ele não chama uma IA nem altera o currículo.
+
 [`generate-resume.js`](generate-resume.js) orquestra as etapas. [`errors.js`](errors.js) define `ResumeValidationError`, incluindo a lista de problemas encontrados.
 
 ## Garantias que devem ser preservadas

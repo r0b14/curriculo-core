@@ -51,6 +51,13 @@ const modules = [
     color: "violet",
   },
   {
+    path: "guides/",
+    title: "Método de currículo",
+    description: "Evidências, escrita de realizações, adaptação por vaga, ATS, privacidade e revisão por IA.",
+    href: `${REPOSITORY_URL}/tree/main/guides`,
+    color: "coral",
+  },
+  {
     path: "test/",
     title: "Testes nativos",
     description: "Casos de segurança LaTeX, defaults privados, ranking e entradas inválidas.",
@@ -268,6 +275,10 @@ function Hero() {
               <div>
                 <p><span className="text-brand-pulse">$</span> <span className="text-white">npm run generate:example</span></p>
                 <p className="pl-4 text-[#77758D]">LaTeX gerado: output/curriculo-exemplo.tex</p>
+              </div>
+              <div>
+                <p><span className="text-brand-pulse">$</span> <span className="text-white">npm run assist:example</span></p>
+                <p className="pl-4 text-[#77758D]">Pacote local criado · nenhum dado enviado</p>
               </div>
               <div className="rounded-[10px] border border-brand-core/30 bg-brand-core/10 p-4">
                 <p className="mb-2 text-[#9E98FF]">pipeline.complete</p>

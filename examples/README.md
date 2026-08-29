@@ -6,6 +6,8 @@ Esta pasta contém entradas fictícias para demonstrar e testar o Currículo Cor
 
 [`curriculo.exemplo.json`](curriculo.exemplo.json) cobre os principais campos do contrato: dados básicos, privacidade, competências, experiências, projetos, formação, idiomas, palavras-chave e opções de layout.
 
+[`vaga.exemplo.txt`](vaga.exemplo.txt) contém uma oportunidade inteiramente fictícia para demonstrar o pacote local de revisão por IA.
+
 Validar o exemplo:
 
 ```bash
@@ -19,6 +21,14 @@ npm run generate:example
 ```
 
 O resultado é criado em `output/curriculo-exemplo.tex`, uma pasta ignorada pelo Git.
+
+Gerar o pacote fictício de revisão:
+
+```bash
+npm run assist:example
+```
+
+Isso cria `output/assistente-exemplo.md` sem chamar serviços externos.
 
 ## Criar outro exemplo
 

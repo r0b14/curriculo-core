@@ -8,10 +8,12 @@
     "curriculo-core": "./src/cli.js"
   },
   "scripts": {
-    "check": "node --check src/cli.js && node --check src/core/generate-resume.js",
+    "check": "node --check src/cli.js && node --check src/core/build-assistant-prompt.js && node --check src/core/generate-resume.js",
     "test": "node --test",
     "validate:example": "node src/cli.js validate --input examples/curriculo.exemplo.json",
-    "generate:example": "node src/cli.js generate --input examples/curriculo.exemplo.json --output output/curriculo-exemplo.tex"
+    "generate:example": "node src/cli.js generate --input examples/curriculo.exemplo.json --output output/curriculo-exemplo.tex",
+    "guide": "node src/cli.js guide",
+    "assist:example": "node src/cli.js assist --input examples/curriculo.exemplo.json --job examples/vaga.exemplo.txt --output output/assistente-exemplo.md"
   },
   "engines": {
     "node": ">=20"

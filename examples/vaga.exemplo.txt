@@ -1,0 +1,14 @@
+Pessoa Desenvolvedora de Software
+
+Organização fictícia procura pessoa para colaborar na construção e manutenção de produtos digitais.
+
+Atividades:
+- desenvolver funcionalidades com JavaScript;
+- criar testes automatizados;
+- colaborar com revisão de código e documentação.
+
+Diferenciais:
+- experiência com Node.js;
+- familiaridade com integração contínua.
+
+Esta descrição é inteiramente fictícia e existe apenas para demonstração.

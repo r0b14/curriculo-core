@@ -14,6 +14,7 @@ O repositório contém somente o núcleo do produto. Não contém currículos re
 - escape de caracteres reservados do LaTeX;
 - ocultação de telefone por padrão;
 - ordenação estável por aderência às palavras-chave da vaga;
+- guia editorial e pacote local para revisão opcional por IA;
 - conteúdo em português do Brasil ou inglês;
 - testes automatizados em Node.js 20 e 22.
 
@@ -47,16 +48,21 @@ O comando cria o `.tex` e o PDF. Consulte o guia do seu sistema em [docs/latex](
 ```text
 curriculo-core validate --input <arquivo.json>
 curriculo-core generate --input <arquivo.json> --output <curriculo.tex> [--compile]
+curriculo-core guide [--output <guia.md>]
+curriculo-core assist --input <arquivo.json> --job <vaga.txt> --output <pacote.md>
 ```
 
 | Opção | Forma curta | Função |
 |---|---|---|
 | `--input` | `-i` | Caminho do JSON de entrada |
-| `--output` | `-o` | Caminho do `.tex` de saída |
+| `--output` | `-o` | Caminho do arquivo de saída |
+| `--job` | — | Descrição da vaga usada por `assist` |
 | `--compile` | — | Executa `pdflatex` depois da geração |
 | `--help` | `-h` | Exibe ajuda |
 
 Os caminhos relativos são resolvidos a partir do diretório atual. A pasta de saída é criada automaticamente.
+
+`assist` valida o currículo e prepara um arquivo para revisão em uma ferramenta de IA escolhida pelo usuário. Ele não executa essa ferramenta, não usa chave de API e não envia dados. Consulte [Assistência de IA pela CLI](ai-assistance.md).
 
 ## Dados mínimos
 
@@ -114,6 +120,7 @@ JSON
 | Validação em runtime | `src/core/validate-resume.js` |
 | Defaults e privacidade | `src/core/normalize-resume.js` |
 | Priorização | `src/core/rank-items.js` |
+| Pacote local de revisão | `src/core/build-assistant-prompt.js` |
 | Escape de texto e URLs | `src/core/latex.js` |
 | Template LaTeX | `src/core/render-latex.js` |
 | Contrato declarativo | `schema/resume.schema.json` |

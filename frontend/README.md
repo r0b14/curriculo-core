@@ -1,6 +1,6 @@
 # Site open source
 
-Esta pasta contém a página pública do Currículo Core, criada com React, TypeScript, Vite e Tailwind CSS. O site apresenta arquitetura, princípios, módulos, quick start e caminhos de contribuição; ele não coleta currículos nem chama serviços de IA.
+Esta pasta contém a página pública do Currículo Core, criada com React, TypeScript, Vite e Tailwind CSS. O site apresenta arquitetura, princípios, módulos, guia editorial, assistência local, quick start e caminhos de contribuição; ele não coleta currículos nem chama serviços de IA.
 
 ## Executar localmente
 

@@ -5,6 +5,8 @@ Este diretório contém a documentação detalhada do Currículo Core. O `README
 ## Produto e desenvolvimento
 
 - [Visão geral, requisitos, primeiro uso e arquitetura](project.md)
+- [Guia canônico de criação de currículos](../guides/resume-creation.md)
+- [Assistência opcional de IA pela CLI](ai-assistance.md)
 - [CLI e código-fonte](../src/README.md)
 - [Pipeline interno de geração](../src/core/README.md)
 - [Contrato de dados JSON](../schema/README.md)
@@ -31,6 +33,7 @@ Este diretório contém a documentação detalhada do Currículo Core. O `README
 
 ## Agentes de IA
 
+- [Fluxo local de revisão para uma IA escolhida pelo usuário](ai-assistance.md)
 - [Playbook para Codex, Claude e Gemini](agents.md)
 - [Contrato canônico do repositório para agentes](../AGENTS.md)
 - [Entrada específica do Claude](../CLAUDE.md)

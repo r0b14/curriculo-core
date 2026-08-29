@@ -27,6 +27,9 @@ npm test
 - ranking por palavras-chave com empates estáveis;
 - rejeição de campos obrigatórios ausentes;
 - rejeição de locale e tipos inválidos.
+- construção do pacote de revisão sem invenção de fatos.
+
+[`cli.test.js`](cli.test.js) executa os comandos `guide` e `assist` de ponta a ponta, sempre com os exemplos fictícios e uma pasta temporária.
 
 ## Ao adicionar casos
 

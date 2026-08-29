@@ -26,6 +26,7 @@ Gerador local e open source de currículos profissionais, legíveis por pessoas 
 - **Honesto:** reorganiza evidências fornecidas, sem inventar competências ou resultados.
 - **Portável:** gera `.tex` sem exigir LaTeX e PDF quando `pdflatex` está disponível.
 - **Simples de integrar:** núcleo em Node.js, sem dependências externas de runtime.
+- **Assistência opcional:** a CLI prepara uma revisão orientada por IA sem enviar dados nem exigir chave no projeto.
 
 ## Comece em 1 minuto
 
@@ -63,6 +64,22 @@ JSON do currículo
 ```
 
 O telefone começa oculto por padrão. Conteúdo fornecido pelo usuário é escapado antes de entrar no documento LaTeX.
+
+## Guia e assistência opcional
+
+Leia no terminal as técnicas canônicas de montagem:
+
+```bash
+npm run guide
+```
+
+Para preparar localmente uma revisão baseada em currículo e vaga:
+
+```bash
+npm run assist:example
+```
+
+O arquivo é criado em `output/assistente-exemplo.md`. Nenhuma IA é chamada e nenhum dado é enviado. A pessoa decide se fornecerá o pacote a uma CLI externa e deve revisar toda sugestão antes de alterar o JSON. Veja o [guia de assistência de IA](docs/ai-assistance.md).
 
 ## Site open source
 
@@ -103,12 +120,15 @@ O contrato completo está em [`schema/resume.schema.json`](schema/resume.schema.
 | Gerar PDF localmente | Sim | [Windows](docs/latex/windows.md) · [Linux](docs/latex/linux.md) · [macOS](docs/latex/macos.md) |
 | Gerar PDF com Docker | Não | [Sem instalação local](docs/latex/without-local-install.md) |
 | Trabalhar com agentes de IA | Não | [Codex, Claude e Gemini](docs/agents.md) |
+| Preparar revisão por uma IA escolhida pelo usuário | Não | [Assistência de IA pela CLI](docs/ai-assistance.md) |
 
 ## Documentação
 
 | Assunto | Referência |
 |---|---|
 | Instalação, arquitetura e CLI | [`docs/project.md`](docs/project.md) |
+| Técnicas de montagem de currículo | [`guides/resume-creation.md`](guides/resume-creation.md) |
+| Assistência opcional por IA | [`docs/ai-assistance.md`](docs/ai-assistance.md) |
 | Fundamentos e dependências LaTeX | [`docs/latex/README.md`](docs/latex/README.md) |
 | Diagnóstico de erros | [`docs/latex/troubleshooting.md`](docs/latex/troubleshooting.md) |
 | Site open source | [`frontend/`](frontend/) |
@@ -132,6 +152,7 @@ Cada área principal mantém um README próximo ao código ou recurso que descre
 | Frontend demonstrativo | [`frontend/README.md`](frontend/README.md) |
 | Docker e pdfLaTeX | [`docker/README.md`](docker/README.md) |
 | GitHub Actions | [`.github/README.md`](.github/README.md) |
+| Guias editoriais | [`guides/README.md`](guides/README.md) |
 
 ## Desenvolvimento
 

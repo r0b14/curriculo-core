@@ -3,18 +3,24 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { dirname, basename, extname, resolve } from 'node:path';
+import { buildAssistantPrompt } from './core/build-assistant-prompt.js';
 import { generateResume } from './core/generate-resume.js';
 import { validateResume } from './core/validate-resume.js';
+
+const GUIDE_URL = new URL('../guides/resume-creation.md', import.meta.url);
 
 const HELP = `Curriculo Core
 
 Uso:
   curriculo-core validate --input <arquivo.json>
   curriculo-core generate --input <arquivo.json> --output <curriculo.tex> [--compile]
+  curriculo-core guide [--output <guia.md>]
+  curriculo-core assist --input <arquivo.json> --job <vaga.txt> --output <pacote.md>
 
 Opções:
   -i, --input     Arquivo JSON com os dados do currículo
-  -o, --output    Destino do arquivo LaTeX
+  -o, --output    Destino do arquivo gerado
+      --job       Arquivo de texto com a descrição da vaga
       --compile   Executa pdflatex após gerar o .tex
   -h, --help      Mostra esta ajuda
 `;
@@ -28,6 +34,7 @@ function readArguments(argv) {
     else if (current === '--help' || current === '-h') options.help = true;
     else if (current === '--input' || current === '-i') options.input = args[++index];
     else if (current === '--output' || current === '-o') options.output = args[++index];
+    else if (current === '--job') options.job = args[++index];
     else throw new Error(`Argumento desconhecido: ${current}`);
   }
   return { command, options };
@@ -61,6 +68,19 @@ async function main() {
     process.stdout.write(HELP);
     return;
   }
+  if (command === 'guide') {
+    const guide = await readFile(GUIDE_URL, 'utf8');
+    if (!options.output) {
+      process.stdout.write(guide);
+      return;
+    }
+    const guideOutputPath = resolve(options.output);
+    await mkdir(dirname(guideOutputPath), { recursive: true });
+    await writeFile(guideOutputPath, guide, 'utf8');
+    process.stdout.write(`Guia copiado: ${guideOutputPath}\n`);
+    return;
+  }
+
   if (!options.input) throw new Error('Informe --input <arquivo.json>.');
   const inputPath = resolve(options.input);
   const resume = await readJson(inputPath);
@@ -70,6 +90,23 @@ async function main() {
     process.stdout.write(`Dados válidos: ${inputPath}\n`);
     return;
   }
+
+  if (command === 'assist') {
+    if (!options.job) throw new Error('Informe --job <vaga.txt>.');
+    if (!options.output) throw new Error('Informe --output <pacote.md>.');
+    validateResume(resume);
+    const [guide, jobDescription] = await Promise.all([
+      readFile(GUIDE_URL, 'utf8'),
+      readFile(resolve(options.job), 'utf8')
+    ]);
+    const outputPath = resolve(options.output);
+    await mkdir(dirname(outputPath), { recursive: true });
+    await writeFile(outputPath, buildAssistantPrompt({ guide, resume, jobDescription }), 'utf8');
+    process.stdout.write(`Pacote local de revisão gerado: ${outputPath}\n`);
+    process.stdout.write('Privacidade: nenhum dado foi enviado. Revise antes de fornecer o arquivo a uma IA externa.\n');
+    return;
+  }
+
   if (command !== 'generate') throw new Error(`Comando desconhecido: ${command}`);
   if (!options.output) throw new Error('Informe --output <curriculo.tex>.');
 

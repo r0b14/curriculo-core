@@ -1,7 +1,12 @@
 {
-  "description": "Delivers a clean, intuitive interface with a top navigation bar and info cards, enhancing user engagement through a modern, responsive design.",
+  "title": "Currículo Core — currículo honesto, por construção",
+  "description": "Projeto open source e local-first que transforma dados JSON em currículos LaTeX claros, privados e legíveis por ATS.",
+  "language": "pt-BR",
   "robots": {
-    "index": false
+    "index": true
+  },
+  "icons": {
+    "icon": "favicon.svg"
   },
   "accessibility": {
     "addBypassLinks": false,

@@ -18,18 +18,27 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: latex-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   compile-example:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run validate:example
-      - run: npm run generate:example
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate fictitious example
+        run: npm run validate:example
+      - name: Generate fictitious LaTeX
+        run: npm run generate:example
       - name: Build isolated LaTeX image
         run: docker build -t curriculo-core-latex -f docker/latex/Dockerfile .
       - name: Compile fictitious example

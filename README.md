@@ -8,10 +8,11 @@ Gerador local e open source de currículos profissionais, legíveis por pessoas 
 
 [![CI](https://github.com/r0b14/curriculo-core/actions/workflows/ci.yml/badge.svg)](https://github.com/r0b14/curriculo-core/actions/workflows/ci.yml)
 [![LaTeX smoke test](https://github.com/r0b14/curriculo-core/actions/workflows/latex-smoke.yml/badge.svg)](https://github.com/r0b14/curriculo-core/actions/workflows/latex-smoke.yml)
+[![GitHub Pages](https://github.com/r0b14/curriculo-core/actions/workflows/pages.yml/badge.svg)](https://r0b14.github.io/curriculo-core/)
 ![Node.js 20+](https://img.shields.io/badge/Node.js-20%2B-3C873A?logo=node.js&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-5B4BFF.svg)](LICENSE)
 
-[Começar](#comece-em-1-minuto) · [Sugestão de front](#sugestão-de-frontend) · [Documentação](docs/README.md) · [Usar sem LaTeX](docs/latex/without-local-install.md) · [Contribuir](CONTRIBUTING.md)
+[Começar](#comece-em-1-minuto) · [Site](https://r0b14.github.io/curriculo-core/) · [Documentação](docs/README.md) · [Usar sem LaTeX](docs/latex/without-local-install.md) · [Contribuir](CONTRIBUTING.md)
 
 </div>
 
@@ -63,11 +64,11 @@ JSON do currículo
 
 O telefone começa oculto por padrão. Conteúdo fornecido pelo usuário é escapado antes de entrar no documento LaTeX.
 
-## Sugestão de frontend
+## Site open source
 
-A pasta [`frontend/`](frontend/) contém uma proposta de interface moderna para demonstrar como o Currículo Core pode ser apresentado como produto web.
+A pasta [`frontend/`](frontend/) contém a página pública do projeto, focada em arquitetura, princípios, quick start e contribuição open source.
 
-Essa implementação usa **React, Vite e Tailwind CSS** e deve ser tratada como uma referência visual e funcional. O núcleo continua independente: validação, privacidade, priorização e geração LaTeX permanecem em `src/core/` e podem ser integradas a outros frontends, APIs ou aplicações.
+Essa implementação usa **React, Vite e Tailwind CSS**, não coleta dados e não chama serviços de IA. O núcleo continua independente em `src/core/`.
 
 Para executar a sugestão de front:
 
@@ -77,7 +78,7 @@ pnpm install
 pnpm dev
 ```
 
-As decisões de marca, componentes e experiência estão documentadas em [`frontend/src/imports/style.md`](frontend/src/imports/style.md).
+O deploy é feito pelo GitHub Actions depois que o CI da `main` passa. Consulte o [guia do GitHub Pages](docs/github-pages.md).
 
 ## Exemplo mínimo
 
@@ -110,11 +111,27 @@ O contrato completo está em [`schema/resume.schema.json`](schema/resume.schema.
 | Instalação, arquitetura e CLI | [`docs/project.md`](docs/project.md) |
 | Fundamentos e dependências LaTeX | [`docs/latex/README.md`](docs/latex/README.md) |
 | Diagnóstico de erros | [`docs/latex/troubleshooting.md`](docs/latex/troubleshooting.md) |
-| Sugestão de frontend | [`frontend/`](frontend/) |
+| Site open source | [`frontend/`](frontend/) |
+| GitHub Pages e CI/CD | [`docs/github-pages.md`](docs/github-pages.md) |
 | Segurança e dados pessoais | [`SECURITY.md`](SECURITY.md) |
 | Instruções para agentes | [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md), [`GEMINI.md`](GEMINI.md) |
 | Brand e design system | [`frontend/src/imports/style.md`](frontend/src/imports/style.md) |
 | Índice completo | [`docs/README.md`](docs/README.md) |
+
+### Mapa por pasta
+
+Cada área principal mantém um README próximo ao código ou recurso que descreve:
+
+| Área | README local |
+|---|---|
+| CLI e código-fonte | [`src/README.md`](src/README.md) |
+| Pipeline de geração | [`src/core/README.md`](src/core/README.md) |
+| Contrato JSON | [`schema/README.md`](schema/README.md) |
+| Dados fictícios | [`examples/README.md`](examples/README.md) |
+| Testes | [`test/README.md`](test/README.md) |
+| Frontend demonstrativo | [`frontend/README.md`](frontend/README.md) |
+| Docker e pdfLaTeX | [`docker/README.md`](docker/README.md) |
+| GitHub Actions | [`.github/README.md`](.github/README.md) |
 
 ## Desenvolvimento
 

@@ -5,6 +5,15 @@ Este diretório contém a documentação detalhada do Currículo Core. O `README
 ## Produto e desenvolvimento
 
 - [Visão geral, requisitos, primeiro uso e arquitetura](project.md)
+- [CLI e código-fonte](../src/README.md)
+- [Pipeline interno de geração](../src/core/README.md)
+- [Contrato de dados JSON](../schema/README.md)
+- [Exemplos fictícios](../examples/README.md)
+- [Testes automatizados](../test/README.md)
+- [Frontend demonstrativo](../frontend/README.md)
+- [GitHub Pages e entrega contínua](github-pages.md)
+- [Contêineres Docker](../docker/README.md)
+- [Automações do GitHub Actions](../.github/README.md)
 - [JSON Schema do currículo](../schema/resume.schema.json)
 - [Exemplo completo e fictício](../examples/curriculo.exemplo.json)
 - [Segurança e privacidade](../SECURITY.md)

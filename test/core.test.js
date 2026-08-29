@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { generateResume } from '../src/core/generate-resume.js';
-import { escapeLatex } from '../src/core/latex.js';
+import { escapeLatex, escapeLatexUrl } from '../src/core/latex.js';
 import { rankItems } from '../src/core/rank-items.js';
 import { ResumeValidationError } from '../src/core/errors.js';
 
@@ -13,6 +13,13 @@ const minimalResume = {
 
 test('escapa caracteres reservados do LaTeX', () => {
   assert.equal(escapeLatex('R&D_100% #1'), 'R\\&D\\_100\\% \\#1');
+});
+
+test('escapa URLs LaTeX e neutraliza barras invertidas', () => {
+  assert.equal(
+    escapeLatexUrl('https://example.com\\{perfil}#cv%20final'),
+    'https://example.com/\\{perfil\\}\\#cv\\%20final'
+  );
 });
 
 test('oculta telefone por padrão e mantém e-mail', () => {
